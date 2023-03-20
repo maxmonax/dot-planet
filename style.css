@@ -1,15 +1,18 @@
 @import "https://fonts.googleapis.com/css2?family=Megrim&display=swap";
-body{
+
+body {
   overflow: hidden;
   margin: 0;
   padding: 0;
   background-color: #160016;
 }
-#title{
+
+#title {
   font-family: Megrim, Arial, Helvetica, sans-serif;
   font-size: 10vh;
   position: absolute;
   margin: 10;
   color: #fc0;
   -webkit-text-stroke: 0.15vh #c0f;
+  user-select: none;
 }
