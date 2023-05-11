@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import {OrbitControls} from "three/addons/controls/OrbitControls";
+import { OrbitControls } from "three/addons/controls/OrbitControls";
 
 console.clear();
 
@@ -9,7 +9,7 @@ let camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.5, 100)
 camera.position.set(0, 4, 30);
 
 let renderer = new THREE.WebGLRenderer({
-    alpha: true
+  alpha: true
 });
 renderer.setClearColor(0x000000, 0);
 renderer.setSize(innerWidth, innerHeight);
@@ -28,15 +28,15 @@ controls.maxDistance = 60;
 controls.minDistance = 2;
 
 let gu = {
-  time: {value: 0}
+  time: { value: 0 }
 }
 
 let sizes = [];
 let shift = [];
 let pushShift = () => {
   shift.push(
-    Math.random() * Math.PI, 
-    Math.random() * Math.PI * 2, 
+    Math.random() * Math.PI,
+    Math.random() * Math.PI * 2,
     (Math.random() * 0.9 + 0.1) * Math.PI * 0.1,
     Math.random() * 0.9 + 0.1
   );
@@ -50,11 +50,11 @@ let pts = new Array(50000).fill().map(p => {
   return new THREE.Vector3().randomDirection().multiplyScalar(Math.random() * planetRadiusDelta + (planetRadius - planetRadiusDelta));
 })
 
-for(let i = 0; i < 80000; i++){
+for (let i = 0; i < 80000; i++) {
   let r = 20, R = 40;
   let rand = Math.pow(Math.random(), 1.5);
   let radius = Math.sqrt(R * R * rand + (1 - rand) * r * r);
-  pts.push(new THREE.Vector3().setFromCylindricalCoords(radius, Math.random() * 2 * Math.PI, (Math.random() - 0.5) * 2 ));
+  pts.push(new THREE.Vector3().setFromCylindricalCoords(radius, Math.random() * 2 * Math.PI, (Math.random() - 0.5) * 2));
   sizes.push(Math.random() * 1.5 + 0.5);
   pushShift();
 }
@@ -62,6 +62,7 @@ for(let i = 0; i < 80000; i++){
 let g = new THREE.BufferGeometry().setFromPoints(pts);
 g.setAttribute("sizes", new THREE.Float32BufferAttribute(sizes, 1));
 g.setAttribute("shift", new THREE.Float32BufferAttribute(shift, 4));
+
 let m = new THREE.PointsMaterial({
   size: 0.125,
   transparent: true,
@@ -113,6 +114,7 @@ let m = new THREE.PointsMaterial({
   }
 
 });
+
 let p = new THREE.Points(g, m);
 p.rotation.order = "ZYX";
 p.rotation.z = 0.2;
